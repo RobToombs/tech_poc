@@ -1,5 +1,6 @@
-###### Flutter/Frontend Environment Setup:
+###### Frontend Environment Setup:
 
+-- Flutter
 1. Install the flutter SDK on your machine (MacOS version here: https://flutter.dev/docs/get-started/install/macos)
 2. Unzip the flutter SDK to where you want, and add it to your tool path, use your own location though!: (export PATH="$PATH:`pwd`/flutter/bin")
 3. Run flutter doctor in your command line (flutter doctor)
@@ -14,6 +15,9 @@
 Tips:
 - Flutter web supports hot reloading, saving your project should cause changes to be picked up automatically
 - Since you cannot debug flutter through the Chrome tools, they've supplied a very robust debugging framework: https://flutter.dev/docs/testing/debugging
+
+-- Elm
+1. WIP
 
 ###### Quarkus/Backend Environment Setup (Optional unless you want to run the full application):
 
