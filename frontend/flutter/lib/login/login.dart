@@ -36,11 +36,11 @@ class _LoginFormState extends State<LoginForm> {
   }
 
   void _navigateToAppointments() {
-    Navigator.of(context).pushNamed('/v2/appointments');
+    Navigator.of(context).pushNamed('/appointments');
   }
 
   void _navigateToSignup() {
-    Navigator.of(context).pushNamed('/v2/sign-up');
+    Navigator.of(context).pushNamed('/sign-up');
   }
 
   @override

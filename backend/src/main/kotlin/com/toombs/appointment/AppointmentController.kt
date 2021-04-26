@@ -5,7 +5,7 @@ import javax.inject.Inject
 import javax.ws.rs.GET
 import javax.ws.rs.Path
 
-@Path("/appointments")
+@Path("/api")
 class AppointmentController {
 
     @Inject
@@ -13,6 +13,7 @@ class AppointmentController {
     lateinit var appointmentService: AppointmentService
 
     @GET
+    @Path("/appointments")
     fun appointments() : List<Appointment> {
         return appointmentService.getAppointments()
     }

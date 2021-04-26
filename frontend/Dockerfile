@@ -1,26 +1,24 @@
-FROM debian:latest
-
-# Add Light Http Server
-RUN apk update && apk upgrade
-RUN apk add --update lighttpd
-
-# Copy our Http server config file over
-COPY ./conf/* /etc/lighttpd/
+FROM nginx:latest
 
 # Copy built Flutter site over
-COPY ./flutter/build/web/index.html /var/www/localhost/htdocs/cupcake.flutter/
-COPY ./flutter/build/web/flutter_service_worker.js /var/www/localhost/htdocs/cupcake.flutter/
-COPY ./flutter/build/web/main.dart.js /var/www/localhost/htdocs/cupcake.flutter/
-COPY ./flutter/build/web/manifest.json /var/www/localhost/htdocs/cupcake.flutter/
-COPY ./flutter/build/web/version.json /var/www/localhost/htdocs/cupcake.flutter/
-COPY ./flutter/build/web/assets/AssetManifest.json /var/www/localhost/htdocs/cupcake.flutter/assets/
-COPY ./flutter/build/web/assets/FontManifest.json /var/www/localhost/htdocs/cupcake.flutter/assets/
-COPY ./flutter/build/web/assets/fonts/* /var/www/localhost/htdocs/cupcake.flutter/assets/fonts/
-COPY ./flutter/build/web/icons/* /var/www/localhost/htdocs/cupcake.flutter/icons/
+COPY ./flutter/build/web/index.html /var/www/cupcake-flutter.com/html/
+COPY ./flutter/build/web/flutter_service_worker.js /var/www/cupcake-flutter.com/html/
+COPY ./flutter/build/web/main.dart.js /var/www/cupcake-flutter.com/html/
+COPY ./flutter/build/web/manifest.json /var/www/cupcake-flutter.com/html/
+COPY ./flutter/build/web/version.json /var/www/cupcake-flutter.com/html/
+COPY ./flutter/build/web/assets/AssetManifest.json /var/www/cupcake-flutter.com/html/assets/
+COPY ./flutter/build/web/assets/FontManifest.json /var/www/cupcake-flutter.com/html/assets/
+COPY ./flutter/build/web/assets/fonts/* /var/www/cupcake-flutter.com/html/assets/fonts/
+COPY ./flutter/build/web/icons/* /var/www/cupcake-flutter.com/html/icons/
 
 # Copy built Elm Site over
-COPY ./elm/build/web/* /var/www/localhost/htdocs/cupcake.elm/
+COPY ./elm/build/web/* /var/www/cupcake-elm.com/html/
 
-EXPOSE 80
+# Change site owner to www-data
+RUN chown www-data:www-data /var/www/cupcake-flutter.com
+RUN chown www-data:www-data /var/www/cupcake-elm.com
 
-CMD ["lighttpd","-D","-f","/etc/lighttpd/lighttpd.conf"]
+# Copy our nginx server block configurations over
+COPY conf/nginx.conf /etc/nginx/nginx.conf
+COPY conf/cupcake-flutter.com /etc/nginx/sites-enabled/cupcake-flutter.conf
+COPY conf/cupcake-elm.com /etc/nginx/sites-enabled/cupcake-elm.conf

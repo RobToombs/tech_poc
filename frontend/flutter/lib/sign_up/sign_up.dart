@@ -73,7 +73,7 @@ class _SignUpFormState extends State<SignUpForm> {
   }
 
   void _navigateToAppointments() {
-    Navigator.of(context).pushNamed('/v2/appointments');
+    Navigator.of(context).pushNamed('/appointments');
   }
 
   @override

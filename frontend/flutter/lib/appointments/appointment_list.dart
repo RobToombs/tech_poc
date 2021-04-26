@@ -112,7 +112,7 @@ class _AppointmentListState extends State<AppointmentList> {
 
   Future<List<Appointment>> _fetchAppointments() async {
     http.Response response =
-        await http.get(Uri.http('localhost:8080', 'appointments'));
+        await http.get(Uri.http('localhost:8080', 'api/appointments'));
 
     if (response.statusCode == 200) {
       return (jsonDecode(response.body) as List)

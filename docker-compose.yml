@@ -1,0 +1,6 @@
+nginx:
+  container_name: tech_poc_container
+  image: tech_poc_image
+  ports:
+    - 80:80
+    - 443:443

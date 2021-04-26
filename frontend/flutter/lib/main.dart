@@ -10,11 +10,11 @@ class SignUpApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      initialRoute: "/v2/login",
+      initialRoute: "/login",
       routes: {
-        '/v2/sign-up': (context) => SignUpScreen(),
-        '/v2/login': (context) => LoginScreen(),
-        '/v2/appointments': (context) => AppointmentScreen(),
+        '/sign-up': (context) => SignUpScreen(),
+        '/login': (context) => LoginScreen(),
+        '/appointments': (context) => AppointmentScreen(),
       },
     );
   }
