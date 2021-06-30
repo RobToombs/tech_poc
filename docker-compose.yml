@@ -1,6 +1,45 @@
-nginx:
-  container_name: tech_poc_container
-  image: tech_poc_image
-  ports:
-    - 80:80
-    - 443:443
+#nginx:
+#  container_name: tech_poc_container
+#  image: tech_poc_image
+#  ports:
+#    - 80:80
+#    - 443:443
+
+version: '3.8'
+services:
+
+  db-postgres:
+    build: ./database
+    container_name: db-postgres
+    ports:
+      - 5432:5432
+
+  backend-app:
+    build: ./backend
+    container_name: backend
+    environment:
+      - DB_SERVER=db-postgres
+      - POSTGRES_DB=postgres
+    ports:
+      - 8080:8080
+    links:
+      - db-postgres
+
+  frontend-elm:
+    build: ./frontend/elm
+    container_name: frontend-elm
+    ports:
+      - 9000:80
+    links:
+      - backend-app
+
+  frontend-flutter:
+    build: ./frontend/flutter
+    container_name: frontend-flutter
+    ports:
+      - 9001:80
+    links:
+      - backend-app
+
+volumes:
+  postgres-data:

@@ -24,3 +24,5 @@ nb-configuration.xml
 /frontend/elm/node_modules/
 /frontend/elm/build/
 /lib/
+/package-lock.json
+/node_modules/
