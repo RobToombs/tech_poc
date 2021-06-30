@@ -13,6 +13,7 @@ services:
     container_name: db-postgres
     ports:
       - 5432:5432
+    restart: always
 
   backend-app:
     build: ./backend
@@ -24,22 +25,33 @@ services:
       - 8080:8080
     links:
       - db-postgres
+    restart: always
+
+  reverse-proxy:
+    build: ./proxy
+    container_name: reverse-proxy
+    ports:
+      - 9000:9000
+      - 9001:9001
+    restart: always
 
   frontend-elm:
+    depends_on:
+      - reverse-proxy
     build: ./frontend/elm
     container_name: frontend-elm
-    ports:
-      - 9000:80
     links:
       - backend-app
+    restart: always
 
   frontend-flutter:
+    depends_on:
+      - reverse-proxy
     build: ./frontend/flutter
     container_name: frontend-flutter
-    ports:
-      - 9001:80
     links:
       - backend-app
+    restart: always
 
 volumes:
   postgres-data:
