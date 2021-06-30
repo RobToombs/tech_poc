@@ -12,7 +12,7 @@ Build a postgres database image from database Dockerfile
 
 3. Create a Docker container from our new image
 
-    `docker create -p 5432:5432 --name quarkus_poc-db postgres-db`
+    `docker create -p 5432:5432 --name postgres-db postgres-db`
 
     This creates a container where the container's TCP port 5432 will be mapped to port 5432 on the Docker host. For clarity, -p 8080:80 would map TCP port 80 in the container to port 8080 on the Docker host.
 
@@ -24,7 +24,7 @@ Build a postgres database image from database Dockerfile
 
 5. Start our Postgres DB container
 
-    `docker start quarkus_poc-db`
+    `docker start postgres-db`
 
 
 6. Verify that the container has started
@@ -34,4 +34,4 @@ Build a postgres database image from database Dockerfile
 
 7. Stop your docker container
    
-    `docker stop quarkus_poc-db`
+    `docker stop postgres-db`

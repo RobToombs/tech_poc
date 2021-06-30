@@ -9,9 +9,9 @@ type Msg
 
 
 type alias Model =
-    {}
+    { populateResult : Maybe Bool }
 
 
 defaultModel : Model
 defaultModel =
-    Model
+    Model Nothing

@@ -13,7 +13,15 @@ update msg model =
         PopulateDatabaseResult result ->
             case result of
                 Ok populated ->
-                    ( model, Cmd.none )
+                    let
+                        updatedModel =
+                            { model | populateResult = Just populated }
+                    in
+                    ( updatedModel, Cmd.none )
 
                 Err err ->
-                    ( model, Cmd.none )
+                    let
+                        updatedModel =
+                            { model | populateResult = Just False }
+                    in
+                    ( updatedModel, Cmd.none )

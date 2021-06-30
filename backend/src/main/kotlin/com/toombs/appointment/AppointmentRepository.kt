@@ -4,5 +4,5 @@ import io.quarkus.hibernate.orm.panache.kotlin.PanacheRepository
 import javax.enterprise.context.ApplicationScoped
 
 @ApplicationScoped
-class AppointmentDAO : PanacheRepository<Appointment> {}
+class AppointmentRepository : PanacheRepository<Appointment> {}
 

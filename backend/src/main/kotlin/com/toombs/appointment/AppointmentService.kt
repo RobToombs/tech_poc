@@ -6,24 +6,38 @@ import java.time.LocalDateTime
 import javax.enterprise.context.ApplicationScoped
 import javax.enterprise.inject.Default
 import javax.inject.Inject
+import javax.transaction.Transactional
 
 @ApplicationScoped
 class AppointmentService {
 
     @Inject
     @field: Default
-    lateinit var appointmentDAO: AppointmentDAO
+    lateinit var appointmentRepository: AppointmentRepository
+
+    @Inject
+    @field: Default
+    lateinit var medicationRepository: MedicationRepository
 
     fun getAppointments() : List<Appointment> {
-        return appointmentDAO.listAll()
+        return appointmentRepository.listAll()
     }
 
+    @Transactional
     fun populateDatabase() : Boolean {
-        for(index in 1..20) {
-            val appt = createAppointment(index)
-            appointmentDAO.persistAndFlush(appt)
+        return try {
+            medicationRepository.deleteAll();
+            appointmentRepository.deleteAll();
+
+            for (index in 1..20) {
+                val appt = createAppointment(index)
+                appointmentRepository.persistAndFlush(appt)
+            }
+
+            true
+        } catch (e: Exception) {
+            false
         }
-        return true
     }
 
     private fun createAppointment(index : Int) : Appointment {

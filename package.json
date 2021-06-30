@@ -2,6 +2,7 @@
   "name": "toombs",
   "version": "1.0.0",
   "scripts": {
+    "start:elm": "cd frontend/elm && npm run start",
     "build": "run-s build:frontend-elm build:frontend-flutter build:backend",
     "build:frontend-elm": "cd frontend/elm && npm run build",
     "build:frontend-flutter": "cd frontend/flutter && flutter build web",
