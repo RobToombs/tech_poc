@@ -32,7 +32,6 @@ services:
     container_name: reverse-proxy
     ports:
       - 9000:9000
-      - 9001:9001
     restart: always
 
   frontend-elm:
