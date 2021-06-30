@@ -6,7 +6,6 @@ import Bootstrap.Grid as Grid
 import Browser
 import Html exposing (Html, text)
 import Model exposing (Model, Msg(..))
-import Url
 
 
 view : Model -> Browser.Document Msg
@@ -20,10 +19,6 @@ createPage : Model -> Html Msg
 createPage model =
     Grid.containerFluid []
         [ CDN.stylesheet
-        , Grid.row []
-            [ Grid.col []
-                [ text ("The current URL ist: " ++ Url.toString model.url) ]
-            ]
         , Grid.row []
             [ Grid.col []
                 [ populateResultMessage model.populateResult ]
