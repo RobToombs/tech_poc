@@ -1,17 +1,25 @@
 module Model exposing (..)
 
+import Browser
+import Browser.Navigation as Navigation exposing (Key)
 import Http exposing (Error)
+import Url exposing (Protocol(..), Url)
 
 
 type Msg
-    = PopulateDatabase
+    = LinkClicked Browser.UrlRequest
+    | UrlChanged Url.Url
+    | PopulateDatabase
     | PopulateDatabaseResult (Result Error Bool)
 
 
 type alias Model =
-    { populateResult : Maybe Bool }
+    { key : Key
+    , url : Url.Url
+    , populateResult : Maybe Bool
+    }
 
 
-defaultModel : Model
-defaultModel =
-    Model Nothing
+defaultModel : Navigation.Key -> Url -> Model
+defaultModel key url =
+    Model key url Nothing
