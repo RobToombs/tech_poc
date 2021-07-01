@@ -46,7 +46,7 @@ class _LoginFormState extends State<LoginForm> {
     Navigator.of(context).pushNamed('/sign-up');
   }
 
-  void _launchURL() async => await canLaunch(_url)
+  void _navigateToAdmin() async => await canLaunch(_url)
       ? await launch(_url, webOnlyWindowName: "_self")
       : throw 'Could not launch $_url';
 
@@ -121,7 +121,7 @@ class _LoginFormState extends State<LoginForm> {
                                   }),
                                 ),
                                 onPressed: () {
-                                  _launchURL();
+                                  _navigateToAdmin();
                                 },
                                 child: Text('Admin'),
                               ),
