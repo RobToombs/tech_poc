@@ -1,5 +1,8 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
+
+const _url = 'http://localhost:9000/admin';
 
 class LoginScreen extends StatelessWidget {
   @override
@@ -43,6 +46,10 @@ class _LoginFormState extends State<LoginForm> {
     Navigator.of(context).pushNamed('/sign-up');
   }
 
+  void _launchURL() async => await canLaunch(_url)
+      ? await launch(_url, webOnlyWindowName: "_self")
+      : throw 'Could not launch $_url';
+
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -78,39 +85,67 @@ class _LoginFormState extends State<LoginForm> {
               child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    RichText(
-                      text: TextSpan(
-                        style: TextStyle(color: Colors.grey),
-                        children: <TextSpan>[
-                          TextSpan(text: 'No account? '),
-                          TextSpan(
-                              text: 'Signup',
-                              style: TextStyle(color: Colors.blue),
-                              recognizer: TapGestureRecognizer()
-                                ..onTap = () {
-                                  _navigateToSignup();
-                                }),
-                        ],
-                      ),
-                    ),
-                    TextButton(
-                      style: ButtonStyle(
-                        foregroundColor: MaterialStateColor.resolveWith(
-                            (Set<MaterialState> states) {
-                          return Colors.white;
-                        }),
-                        backgroundColor: MaterialStateColor.resolveWith(
-                            (Set<MaterialState> states) {
-                          return Colors.blue;
-                        }),
-                      ),
-                      onPressed: () {
-                        if (_formKey.currentState!.validate()) {
-                          _navigateToAppointments();
-                        }
-                      },
-                      child: Text('Login'),
-                    ),
+                    Expanded(
+                        flex: 2,
+                        child: RichText(
+                          text: TextSpan(
+                            style: TextStyle(color: Colors.grey),
+                            children: <TextSpan>[
+                              TextSpan(text: 'No account? '),
+                              TextSpan(
+                                  text: 'Signup',
+                                  style: TextStyle(color: Colors.blue),
+                                  recognizer: TapGestureRecognizer()
+                                    ..onTap = () {
+                                      _navigateToSignup();
+                                    }),
+                            ],
+                          ),
+                        )),
+                    Expanded(
+                        flex: 1,
+                        child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              TextButton(
+                                style: ButtonStyle(
+                                  foregroundColor:
+                                      MaterialStateColor.resolveWith(
+                                          (Set<MaterialState> states) {
+                                    return Colors.white;
+                                  }),
+                                  backgroundColor:
+                                      MaterialStateColor.resolveWith(
+                                          (Set<MaterialState> states) {
+                                    return Colors.blue;
+                                  }),
+                                ),
+                                onPressed: () {
+                                  _launchURL();
+                                },
+                                child: Text('Admin'),
+                              ),
+                              TextButton(
+                                style: ButtonStyle(
+                                  foregroundColor:
+                                      MaterialStateColor.resolveWith(
+                                          (Set<MaterialState> states) {
+                                    return Colors.white;
+                                  }),
+                                  backgroundColor:
+                                      MaterialStateColor.resolveWith(
+                                          (Set<MaterialState> states) {
+                                    return Colors.blue;
+                                  }),
+                                ),
+                                onPressed: () {
+                                  if (_formKey.currentState!.validate()) {
+                                    _navigateToAppointments();
+                                  }
+                                },
+                                child: Text('Login'),
+                              ),
+                            ]))
                   ])),
         ],
       ),
