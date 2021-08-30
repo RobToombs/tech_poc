@@ -3,6 +3,10 @@ import Information from "../views/Information.vue";
 
 const routes = [
   {
+    path: "/patient",
+    redirect: "/patient/info",
+  },
+  {
     path: "/patient/info",
     name: "Info",
     component: Information,
@@ -30,8 +34,8 @@ const router = createRouter({
 });
 
 router.beforeEach((to, from, next) => {
-  document.title = to.meta.title
-  next()
-})
+  document.title = to.meta.title;
+  next();
+});
 
 export default router;

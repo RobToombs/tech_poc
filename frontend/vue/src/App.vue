@@ -1,7 +1,8 @@
 <template>
   <div id="nav">
     <router-link to="/patient/info">Info</router-link> |
-    <router-link to="/patient/cards">Cards</router-link>
+    <router-link to="/patient/cards">Cards</router-link> |
+    <a href="/appointments" target="_self">Appointments</a>
   </div>
   <router-view />
 </template>
