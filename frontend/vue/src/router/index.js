@@ -3,6 +3,10 @@ import Information from "../views/Information.vue";
 
 const routes = [
   {
+    path: "/",
+    redirect: "/patient/info",
+  },
+  {
     path: "/patient",
     redirect: "/patient/info",
   },
