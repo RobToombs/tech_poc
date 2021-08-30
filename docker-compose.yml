@@ -52,5 +52,14 @@ services:
       - backend-app
     restart: always
 
+  frontend-vue:
+    depends_on:
+      - reverse-proxy
+    build: ./frontend/vue
+    container_name: frontend-vue
+    links:
+      - backend-app
+    restart: always
+
 volumes:
   postgres-data:

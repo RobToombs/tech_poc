@@ -3,9 +3,10 @@
   "version": "1.0.0",
   "scripts": {
     "start:elm": "cd frontend/elm && npm run start",
-    "build": "run-s build:frontend-elm build:frontend-flutter build:backend",
+    "build": "run-s build:frontend-elm build:frontend-flutter build:frontend-vue build:backend",
     "build:frontend-elm": "cd frontend/elm && npm run build",
     "build:frontend-flutter": "cd frontend/flutter && flutter build web",
+    "build:frontend-vue": "cd frontend/vue && npm run build",
     "build:backend": "cd backend && ./gradlew build"
   },
   "devDependencies": {
